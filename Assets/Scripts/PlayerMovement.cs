@@ -71,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
 
         movementDirection = new Vector2(moveX, moveY);
         rb.velocity = movementDirection * speed;
-
     }
 
     void LootAtMouse()
