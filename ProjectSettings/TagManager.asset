@@ -9,6 +9,7 @@ TagManager:
   - PlayerBulletBig
   - Spawner
   - EnemyKnockedOut
+  - Portal
   layers:
   - Default
   - TransparentFX
