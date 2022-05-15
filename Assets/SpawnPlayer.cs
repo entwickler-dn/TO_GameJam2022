@@ -6,9 +6,14 @@ public class SpawnPlayer : MonoBehaviour
 {
     public GameObject player;
 
-    void Start()
+    private void Awake()
     {
         Instantiate(player, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+    void Start()
+    {
+        //Instantiate(player, transform.position, Quaternion.identity);
+        //Destroy(gameObject);
     }
 }

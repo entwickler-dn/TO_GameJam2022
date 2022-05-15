@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pointCounter;
     public bool canAddPoints = true;
 
-    public bool skipTutorial = false;
+    public AudioSource gameMusic;
 
     void Awake()
     {
@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(skipTutorial)
+        gameMusic.volume = MainMenu.gameVolume;
+
+        if (MainMenu.skipTutorial)
         {
             currentMap = Instantiate(maps[Random.Range(0, maps.Length - 1)], Vector3.zero, Quaternion.identity);
         }

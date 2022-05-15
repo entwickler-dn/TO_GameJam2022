@@ -28,13 +28,13 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        Invoke("SpawnFirstWave", 0.5f);
+        Invoke("SpawnFirstWave", 1f);
     }
 
     void SpawnFirstWave()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        if (GameManager.instance.skipTutorial)
+        if (MainMenu.skipTutorial)
         {
             StartCoroutine(SpawnEnemies2(maxEnemyCount));
         }
@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         TimerDown();
-        if(GameManager.instance.skipTutorial)
+        if(MainMenu.skipTutorial)
             SpawnNextRound();
     }
 
