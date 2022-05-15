@@ -12,10 +12,15 @@ public class PlayerHealth : MonoBehaviour
     float invulTimeCounter;
     //public GameObject[] healthSprites;
 
+    AudioSource playerAudio;
+    AudioClip hitAudio;
+
     void Start()
     {
         //health = healthSprites.Length;
         invulTimeCounter = invulTime;
+        playerAudio = GetComponent<AudioSource>();
+        hitAudio = (AudioClip)Resources.Load("hitSound");
     }
 
     void Update()
@@ -37,6 +42,8 @@ public class PlayerHealth : MonoBehaviour
     public void LoseHealth(int amount)
     {
         canBeDamaged = false;
+        playerAudio.clip = hitAudio;
+        playerAudio.Play();
         Debug.Log("aoñjsndasd");
         //GetComponent<PlayerAnimator>().TriggerHurtAnim();
         health -= amount;

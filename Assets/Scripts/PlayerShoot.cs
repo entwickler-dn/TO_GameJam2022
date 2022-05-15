@@ -28,6 +28,10 @@ public class PlayerShoot : MonoBehaviour
     float launchEnemyForce;
     float holdDownStartTime;
 
+    AudioSource playerAudio;
+    AudioClip shootAudio, launchAudio;
+
+
     void Awake()
     {
         instance = this;
@@ -35,6 +39,9 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         timerBetweenBulletsCount = timerBetweenBullets;
+        playerAudio = GetComponent<AudioSource>();
+        shootAudio = (AudioClip)Resources.Load("shootSound");
+        launchAudio = (AudioClip)Resources.Load("throuEnemySound");
     }
 
     void Update()
@@ -101,9 +108,11 @@ public class PlayerShoot : MonoBehaviour
 
     public void Shoot()
     {
+        playerAudio.clip = shootAudio;
+        playerAudio.Play();
         //GetComponent<PlayerAnimator>().TriggerShootAnim();
 
-        if(PlayerGrabEnemy.instance.grabbedEnemy == null)
+        if (PlayerGrabEnemy.instance.grabbedEnemy == null)
         {
             // Si solo disparas una bala...
             if (timerToMaxDamageCount < timerToMaxDamage)
@@ -143,6 +152,9 @@ public class PlayerShoot : MonoBehaviour
 
     void ShootEnemy(float force)
     {
+        playerAudio.clip = launchAudio;
+        playerAudio.Play();
+
         launchedEnemy = PlayerGrabEnemy.instance.grabbedEnemy;
         PlayerGrabEnemy.instance.grabbedEnemy = null;
         launchedEnemy.transform.parent = null;
