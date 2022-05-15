@@ -29,6 +29,7 @@ public class PortalScript : MonoBehaviour
         if (col.gameObject.CompareTag("EnemyKnockedOut"))
         {
             GameManager.instance.AddPoints(col.gameObject.GetComponent<EnemyHealth>().points);
+            SpawnManager.instance.RemoveEnemyFromCounter();
             Destroy(col.gameObject);
             PlayerShoot.instance.launchedEnemy = null;
         }

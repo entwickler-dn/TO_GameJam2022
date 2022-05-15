@@ -66,7 +66,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (col.gameObject.CompareTag("Enemy") && canBeDamaged)
             {
-                LoseHealth(1);
+                LoseHealth(col.gameObject.GetComponent<EnemyHealth>().damage);
             }
         }
     }

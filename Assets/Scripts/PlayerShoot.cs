@@ -135,7 +135,7 @@ public class PlayerShoot : MonoBehaviour
 
     float CalculateHoldDownForce(float holdTime)
     {
-        float maxForceHoldDownTime = 2f;
+        float maxForceHoldDownTime = 1.5f;
         float holdTimeNormalized = Mathf.Clamp01(holdTime/maxForceHoldDownTime);
         float force = holdTimeNormalized * 50;
         return force;
@@ -148,7 +148,7 @@ public class PlayerShoot : MonoBehaviour
         launchedEnemy.transform.parent = null;
         launchedEnemy.GetComponent<EnemyHealth>().isGrabbed = false;
         //launchedEnemy.GetComponent<Rigidbody2D>().velocity = launchedEnemy.transform.right * force;
-        launchedEnemy.GetComponent<Rigidbody2D>().AddForce(launchedEnemy.transform.right * force/5, ForceMode2D.Impulse);
+        launchedEnemy.GetComponent<Rigidbody2D>().AddForce(launchedEnemy.transform.right * force/3, ForceMode2D.Impulse);
         PlayerGrabEnemy.instance.enemyLaunched = true;
     }
 

@@ -15,6 +15,8 @@ public class EnemyHealth : MonoBehaviour
     public float maxHealth;
 
     public int points;
+    public int damage;
+    public int weight;
 
     public float knockedPush;
     public float knockedPushTime;

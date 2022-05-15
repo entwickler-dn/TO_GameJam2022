@@ -163,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011597633, y: -0.42254254}
+  m_Offset: {x: 0.02087164, y: -0.25097233}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -174,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0282879, y: 0.8750852}
+  m_Size: {x: 1.0097399, y: 1.2182256}
   m_EdgeRadius: 0
 --- !u!114 &2964589488542558927
 MonoBehaviour:
@@ -361,11 +361,13 @@ MonoBehaviour:
   health: 0
   maxHealth: 7
   points: 100
+  damage: 2
+  weight: 20
   knockedPush: 12
   knockedPushTime: 0.2
   playerPush: 15
   playerPushTime: 0.15
-  knockedOutTime: 3
+  knockedOutTime: 6
   knockedOutTimeCount: 0
   isGrabbed: 0
   invulTime: 0.7

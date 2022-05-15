@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 5248745642182777976}
   - component: {fileID: 2273922739680880765}
   - component: {fileID: 3534347146576244564}
+  - component: {fileID: 3993429455663659523}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -422,7 +423,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1766844560934434728}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c4c38a89f18464b44893a5f3cbf48a38, type: 2}
+  m_Material: {fileID: 6200000, guid: d65cc25866858c642b6b2f4d117510d5, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -455,7 +456,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1766844560934434728}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d65cc25866858c642b6b2f4d117510d5, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -472,7 +473,7 @@ Animator:
   m_GameObject: {fileID: 1766844560934434728}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 10b618f436998114bb26f3ba157ba2ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -519,13 +520,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb9b37bd838a6249a41a4093bb827e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6881445179355641611, guid: 4f5d6994e8fc82b49829c2a9149dc2fb, type: 3}
+  bulletPrefabSmall: {fileID: 6881445179355641611, guid: 82f7e4db591156f4a97b6eeb9349d089, type: 3}
+  bulletPrefabBig: {fileID: 6881445179355641611, guid: 4f5d6994e8fc82b49829c2a9149dc2fb, type: 3}
   shootPoint: {fileID: 1766844560173034796}
   canShootBullet: 1
-  timerBetweenBullets: 1
+  timerBetweenBullets: 0.7
   timerBetweenBulletsCount: 0
   strayFactor: 2
-  bulletSpeed: 10
+  bulletSpeed: 15
+  timerToMaxDamage: 1.5
+  launchedEnemy: {fileID: 0}
 --- !u!114 &2273922739680880765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bc377f0fc35824a87bde51552d6cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 6
   canBeDamaged: 1
   invulTime: 0.15
 --- !u!114 &3534347146576244564
@@ -553,6 +557,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3756f200dbc358a41bb542b43e77cd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3993429455663659523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766844560934434728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b634dd71935c13743bcbf0b0cf69adb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGrab: 2.5
+  grabbedEnemy: {fileID: 0}
+  grabbedEnemyParent: {fileID: 1766844560173034796}
+  enemyLaunched: 0
 --- !u!1 &1766844560953468153
 GameObject:
   m_ObjectHideFlags: 0
