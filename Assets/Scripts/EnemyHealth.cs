@@ -32,6 +32,9 @@ public class EnemyHealth : MonoBehaviour
     public float invulTime;
     float invulTimeCounter;
 
+    [Header("Goat")]
+    public bool isGoat = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +44,8 @@ public class EnemyHealth : MonoBehaviour
         pointEffector = GetComponent<PointEffector2D>();
         health = maxHealth;
 
-        GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Player").transform;
+        if(!isGoat)
+            GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
