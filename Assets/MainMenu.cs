@@ -53,14 +53,9 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    public void OptionsButton()
-    {
-
-    }
-
     public void CreditsButton()
     {
-        
+        SceneManager.LoadScene("Credits");
     }
 
     public void Buttoncito()

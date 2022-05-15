@@ -20,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     float timeBetweenRoundsCount;
 
     public bool itHasStarted = false;
+    public bool isTutorial = false;
 
     void Awake()
     {
@@ -34,7 +35,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnFirstWave()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        if (MainMenu.skipTutorial)
+        if (!isTutorial)
         {
             StartCoroutine(SpawnEnemies2(maxEnemyCount));
         }
@@ -48,7 +49,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         TimerDown();
-        if(MainMenu.skipTutorial)
+        if(!isTutorial)
             SpawnNextRound();
     }
 

@@ -51,16 +51,16 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<EnemyAnimationManager>().knockedOut && !isGrabbed && !PlayerGrabEnemy.instance.enemyLaunched)
-        {
-            knockedOutTimeCount -= Time.deltaTime;
-        }
-
         if (knockedOutTimeCount <= 0 && GetComponent<EnemyAnimationManager>().knockedOut)
         {
             GetUp();
             knockedOutTimeCount = knockedOutTime;
         }
+
+        if (GetComponent<EnemyAnimationManager>().knockedOut && !isGrabbed && !PlayerGrabEnemy.instance.enemyLaunched)
+        {
+            knockedOutTimeCount -= Time.deltaTime;
+        }        
 
         if (!canBeDamaged)
         {
@@ -88,6 +88,7 @@ public class EnemyHealth : MonoBehaviour
     bool isRunningCoroutineDeath = false;
     IEnumerator KnockedOut(Vector2 bulletDir)
     {
+        GetComponent<EnemyAnimationManager>().knockedOut = true;
         isRunningCoroutineDeath = true;
         bulletDir.Normalize();
         GetComponent<AIPath>().enabled = false;
@@ -96,7 +97,6 @@ public class EnemyHealth : MonoBehaviour
         pointEffector.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Default");
         rb.AddForce(bulletDir * knockedPush, ForceMode2D.Impulse);
-        GetComponent<EnemyAnimationManager>().knockedOut = true;
         yield return new WaitForSeconds(knockedPushTime);
         rb.velocity = Vector3.zero;
         bodyCol.isTrigger = true;

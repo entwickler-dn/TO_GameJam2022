@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -10,9 +11,37 @@ public class TutorialManager : MonoBehaviour
     public int tutoIndex = 0;
     bool changeIndex = false;
     bool finishedTutorial = false;
+
+    public int totalPoints;
+    public GameObject tutorialMap;
+    public GameObject currentMap;
+
+    public TextMeshProUGUI pointCounter;
+    public bool canAddPoints = true;
+
+    public AudioSource gameMusic;
+
+    public GameObject deathPanel;
+
+    void Awake()
+    {
+    }
+
     void Start()
     {
-        
+        gameMusic.volume = MainMenu.gameVolume;
+
+        deathPanel.SetActive(false);
+
+        currentMap = Instantiate(tutorialMap, Vector3.zero, Quaternion.identity);
+
+        AstarPath.active.Scan();
+    }
+
+    public void AddPoints(int amount)
+    {
+        canAddPoints = false;
+        totalPoints += amount;
     }
 
     void Update()
@@ -36,9 +65,24 @@ public class TutorialManager : MonoBehaviour
         //        break;
         //}
 
+        pointCounter.text = totalPoints.ToString("0000000");
+
         tutoText.text = tutorialTexts[tutoIndex];
 
-        if((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.D)) && !changeIndex && tutoIndex == 0)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().health <= 0)
+        {
+            deathPanel.SetActive(true);
+        }
+
+        if (deathPanel.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("main menu");
+            }
+        }
+
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.D)) && !changeIndex && tutoIndex == 0)
         {
             changeIndex = true;
             tutoIndex++;
@@ -64,7 +108,7 @@ public class TutorialManager : MonoBehaviour
 
         //else if ((!GameObject.FindGameObjectWithTag("EnemyKnockedOut").GetComponent<EnemyHealth>().isGrabbed && (GameObject.FindGameObjectWithTag("EnemyKnockedOut") == null ||
         //    GameObject.FindGameObjectWithTag("Enemy") == null)) && !changeIndex && tutoIndex == 3)
-        else if ((GameManager.instance.totalPoints > 0) && !changeIndex && tutoIndex == 3)
+        else if ((totalPoints > 0) && !changeIndex && tutoIndex == 3)
         {
             changeIndex = true;
             tutoIndex++;
@@ -76,6 +120,12 @@ public class TutorialManager : MonoBehaviour
             Invoke("WaitACoupleOfSeconds", 2f);
             finishedTutorial = true;
         }
+
+        if(finishedTutorial)
+        {
+            //MainMenu.skipTutorial = true;
+            Invoke("LoadMainGame", 2.5f);
+        }
     }
 
     void WaitACoupleOfSeconds()
@@ -83,5 +133,10 @@ public class TutorialManager : MonoBehaviour
         changeIndex = true;
         tutoIndex++;
         changeIndex = false;
+    }
+
+    void LoadMainGame()
+    {
+        SceneManager.LoadScene("MainGame");
     }
 }
