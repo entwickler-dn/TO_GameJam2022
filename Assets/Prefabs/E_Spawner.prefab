@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5391683263770089591}
   - component: {fileID: 5391683263770089584}
   - component: {fileID: -6867803564068088717}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: E_Spawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}
@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 3026158721387634536, guid: e6ca9986f6fbcd54cb077bb0ef8f9f72, type: 3}
   - {fileID: 8136642322619820272, guid: b19ff84005b24ef47a6668cffdaf7873, type: 3}
   - {fileID: 2032595130174941829, guid: c87eb127108202e40be351a90022e1cd, type: 3}
+  totalSpawnPercentage: 0
 --- !u!58 &-6867803564068088717
 CircleCollider2D:
   m_ObjectHideFlags: 0
