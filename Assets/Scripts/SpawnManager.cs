@@ -48,7 +48,8 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         TimerDown();
-        SpawnNextRound();
+        if(GameManager.instance.skipTutorial)
+            SpawnNextRound();
     }
 
     void SpawnNextRound()
@@ -106,7 +107,7 @@ public class SpawnManager : MonoBehaviour
         {
             Vector2 spawnPos = playerPos + Random.insideUnitCircle * enemySpawnRadius;
             if (Vector2.Distance(spawnPos, playerPos) > 5f && !Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius, LayerMask.GetMask("Spawner")) &&
-                Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius, LayerMask.GetMask("Floor")))
+                Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius * 0.5f, LayerMask.GetMask("Floor")))
             {
                 yield return new WaitForSeconds(0.5f);
                 GameObject enemySpawner = Instantiate(enemySpawnerPrefab, spawnPos, Quaternion.identity);

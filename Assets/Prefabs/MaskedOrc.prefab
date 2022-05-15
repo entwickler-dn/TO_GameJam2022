@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9b47e6aacf95c0540a6ba51bc89063c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b6c1b870782c14084e36899f10c2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  capsuleCol: {fileID: 0}
   health: 0
   maxHealth: 3
   points: 20
@@ -365,12 +366,13 @@ MonoBehaviour:
   weight: 100
   knockedPush: 12
   knockedPushTime: 0.2
-  playerPush: 15
-  playerPushTime: 0.15
+  playerPush: 11
+  playerPushTime: 0.12
   knockedOutTime: 3
   knockedOutTimeCount: 0
   isGrabbed: 0
   invulTime: 0.7
+  isGoat: 0
 --- !u!114 &7922081193780414709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,8 +399,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07328434, y: -0.4771407}
-  m_Size: {x: 0.6534344, y: 0.24968371}
+  m_Offset: {x: 0.07328435, y: -0.36825365}
+  m_Size: {x: 0.65343446, y: 0.46745783}
   m_Direction: 1
 --- !u!250 &8013815338740483787
 PointEffector2D:

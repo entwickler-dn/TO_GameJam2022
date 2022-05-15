@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject currentMap;
 
     public TextMeshProUGUI pointCounter;
+    public bool canAddPoints = true;
 
     public bool skipTutorial = false;
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPoints(int amount)
     {
+        canAddPoints = false;
         totalPoints += amount;
     }
 }

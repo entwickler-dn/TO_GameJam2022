@@ -28,7 +28,7 @@ public class PlayerGrabEnemy : MonoBehaviour
 
         if(distanceToNearestKnockedEnemy < distanceToGrab && grabbedEnemy == null)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetMouseButtonDown(1))
             {
                 grabbedEnemy = FindClosestEnemy();
                 grabbedEnemy.GetComponent<EnemyHealth>().isGrabbed = true;

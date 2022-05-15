@@ -15,7 +15,7 @@ public class SpawnEnemy : MonoBehaviour
             totalSpawnPercentage += enemyTypes[i].GetComponent<EnemyHealth>().weight;
         }
 
-        Invoke("SpawnEnemyMethod", 2f);
+        Invoke("SpawnEnemyMethod", 1.3f);
     }
 
     void SpawnEnemyMethod()
@@ -32,12 +32,16 @@ public class SpawnEnemy : MonoBehaviour
             randomNumber -= enemyTypes[i].GetComponent<EnemyHealth>().weight;
         }
         SpawnManager.instance.itHasStarted = true;
-        Destroy(gameObject);
 
         //int randomNumber = Random.Range(0, enemyTypes.Count);
         //GameObject enemy = Instantiate(enemyTypes[randomNumber], transform.position, Quaternion.identity);
         //SpawnManager.instance.AddEnemyToCounter();
         //SpawnManager.instance.itHasStarted = true;
         //Destroy(gameObject);
+    }
+
+    public void DestroyPortal()
+    {
+        Destroy(gameObject);
     }
 }

@@ -43,22 +43,23 @@ public class EnemyHealth : MonoBehaviour
         circleColEffector = GetComponent<CircleCollider2D>();
         pointEffector = GetComponent<PointEffector2D>();
         health = maxHealth;
+        knockedOutTimeCount = knockedOutTime;
 
-        if(!isGoat)
+        if (!isGoat)
             GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
-        if(GetComponent<EnemyAnimationManager>().knockedOut && !isGrabbed && !PlayerGrabEnemy.instance.enemyLaunched)
+        if (GetComponent<EnemyAnimationManager>().knockedOut && !isGrabbed && !PlayerGrabEnemy.instance.enemyLaunched)
         {
             knockedOutTimeCount -= Time.deltaTime;
         }
 
-        if(knockedOutTimeCount <= 0)
+        if (knockedOutTimeCount <= 0 && GetComponent<EnemyAnimationManager>().knockedOut)
         {
-            knockedOutTimeCount = knockedOutTime;
             GetUp();
+            knockedOutTimeCount = knockedOutTime;
         }
 
         if (!canBeDamaged)
@@ -80,6 +81,7 @@ public class EnemyHealth : MonoBehaviour
         if(health <= 0 && !isRunningCoroutineDeath)
         {
             StartCoroutine(KnockedOut(bulletDir));
+            Debug.Log("MURIO");
         }
     }
 
@@ -121,7 +123,7 @@ public class EnemyHealth : MonoBehaviour
         capsuleCol.enabled = true;
         circleColEffector.enabled = true;
         pointEffector.enabled = true;
-        health = maxHealth;
+        health = (int)maxHealth/2;
         GetComponent<AIPath>().enabled = true;
         GetComponent<EnemyRotation>().enabled = true;
         gameObject.transform.tag = "Enemy";

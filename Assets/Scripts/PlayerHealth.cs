@@ -52,12 +52,12 @@ public class PlayerHealth : MonoBehaviour
     {
         //GetComponent<PlayerMovement>().canMove = false;
         //GetComponent<PlayerMovement>().canAim = false;
+        GetComponent<PlayerAnimator>().TriggerDeathAnim();
         Destroy(GetComponent<PlayerMovement>());
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(GetComponent<PlayerShoot>());
         //Destroy(GetComponent<PlayerRunAndDodgeStamina>());
-        Destroy(GetComponent<PlayerAnimator>());
-        Debug.Log("Moriste, puto");
+        //Destroy(GetComponent<PlayerAnimator>());
     }
 
     private void OnTriggerEnter2D(Collider2D col)

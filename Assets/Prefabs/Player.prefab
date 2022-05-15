@@ -502,7 +502,7 @@ MonoBehaviour:
   dodgeIcon: {fileID: 0}
   moveX: 0
   moveY: 0
-  speedBase: 5
+  speedBase: 6.5
   linearDrag: 10
   canMove: 1
   canAim: 1
