@@ -10,6 +10,7 @@ TagManager:
   - Spawner
   - EnemyKnockedOut
   - Portal
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
