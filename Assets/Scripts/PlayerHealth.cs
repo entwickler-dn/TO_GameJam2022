@@ -10,11 +10,11 @@ public class PlayerHealth : MonoBehaviour
     bool isDeath => (health <= 0);
     public float invulTime;
     float invulTimeCounter;
-    public GameObject[] healthSprites;
+    //public GameObject[] healthSprites;
 
     void Start()
     {
-        health = healthSprites.Length;
+        //health = healthSprites.Length;
         invulTimeCounter = invulTime;
     }
 
@@ -37,12 +37,13 @@ public class PlayerHealth : MonoBehaviour
     public void LoseHealth(int amount)
     {
         canBeDamaged = false;
-        GetComponent<PlayerAnimator>().TriggerHurtAnim();
+        Debug.Log("aoñjsndasd");
+        //GetComponent<PlayerAnimator>().TriggerHurtAnim();
         health -= amount;
-        healthSprites[health].SetActive(false);
+        //healthSprites[health].SetActive(false);
         if (health <= 0)
         {
-            GetComponent<PlayerAnimator>().TriggerDeathAnim();
+            //GetComponent<PlayerAnimator>().TriggerDeathAnim();
             Death();
         }
     }
@@ -54,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         Destroy(GetComponent<PlayerMovement>());
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(GetComponent<PlayerShoot>());
-        Destroy(GetComponent<PlayerRunAndDodgeStamina>());
+        //Destroy(GetComponent<PlayerRunAndDodgeStamina>());
         Destroy(GetComponent<PlayerAnimator>());
         Debug.Log("Moriste, puto");
     }
@@ -63,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(!isDeath)
         {
-            if ((col.gameObject.CompareTag("Bullet") || col.gameObject.CompareTag("Enemy")) && canBeDamaged)
+            if (col.gameObject.CompareTag("Enemy") && canBeDamaged)
             {
                 LoseHealth(1);
             }

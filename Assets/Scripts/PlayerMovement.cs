@@ -40,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         LootAtMouse();
         FlipCharacter();
-
-        anim.SetBool("isWalking", isMoving);
     }
 
     void MovementUpdate()

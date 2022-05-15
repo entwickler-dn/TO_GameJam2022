@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
 {
     public static PlayerShoot instance;
 
-    [SerializeField] public GameObject bulletPrefab;
+    [SerializeField] public GameObject bulletPrefabSmall, bulletPrefabBig;
     [SerializeField] public Transform shootPoint;
 
     public bool canShootBullet = true;
@@ -17,6 +17,16 @@ public class PlayerShoot : MonoBehaviour
 
     public float strayFactor;
     public float bulletSpeed;
+
+    bool chargeAttack = false;
+    public float timerToMaxDamage;
+    float timerToMaxDamageCount;
+    GameObject bullet;
+
+    [Header("Launch Enemy")]
+    public GameObject launchedEnemy;
+    float launchEnemyForce;
+    float holdDownStartTime;
 
     void Awake()
     {
@@ -31,11 +41,29 @@ public class PlayerShoot : MonoBehaviour
     {
         CanShootBulletAgain();
         CheckIfShoot();
+        GetComponent<Animator>().SetBool("chargeAttack", chargeAttack);
 
+        if (PlayerGrabEnemy.instance.enemyLaunched && launchedEnemy != null)
+        {
+            Rigidbody2D enemyRB = launchedEnemy.GetComponent<Rigidbody2D>();
+            float step = 5 * Time.deltaTime;
+            enemyRB.velocity = Vector2.MoveTowards(enemyRB.velocity, Vector2.zero, step);
+
+            if (enemyRB.velocity == Vector2.zero || !launchedEnemy.GetComponent<EnemyAnimationManager>().knockedOut)
+            {
+                PlayerGrabEnemy.instance.enemyLaunched = false;
+            }
+        }
     }
 
     void CheckIfShoot()
     {
+        if (timerToMaxDamageCount >= timerToMaxDamage)
+        {
+            chargeAttack = true;
+        }
+        else chargeAttack = false;
+
         if (!canShootBullet)
         {
             if (Input.GetMouseButton(0))
@@ -45,9 +73,28 @@ public class PlayerShoot : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButton(0))
+            if(PlayerGrabEnemy.instance.grabbedEnemy == null)
             {
-                Shoot();
+                if (Input.GetMouseButton(0))
+                {
+                    timerToMaxDamageCount += Time.deltaTime;
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    Shoot();
+                }
+            }
+            else
+            {
+                if(Input.GetMouseButtonDown(0))
+                {
+                    holdDownStartTime = Time.time;
+                }
+                if(Input.GetMouseButtonUp(0))
+                {
+                    float holdDownTime = Time.time - holdDownStartTime;
+                    ShootEnemy(CalculateHoldDownForce(holdDownTime));
+                }
             }
         }
     }
@@ -56,14 +103,53 @@ public class PlayerShoot : MonoBehaviour
     {
         //GetComponent<PlayerAnimator>().TriggerShootAnim();
 
-        // Si solo disparas una bala...
-        var bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
-        var randomNumberRotate = Random.Range(-strayFactor, strayFactor);
-        bullet.transform.Rotate(0, 0, randomNumberRotate);
-        bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * bulletSpeed;
-        Destroy(bullet, 3f);
-       
-        canShootBullet = false;
+        if(PlayerGrabEnemy.instance.grabbedEnemy == null)
+        {
+            // Si solo disparas una bala...
+            if (timerToMaxDamageCount < timerToMaxDamage)
+            {
+                bullet = Instantiate(bulletPrefabSmall, shootPoint.position, shootPoint.rotation);
+            }
+            else
+            {
+                bullet = Instantiate(bulletPrefabBig, shootPoint.position, shootPoint.rotation);
+            }
+            var randomNumberRotate = Random.Range(-strayFactor, strayFactor);
+            bullet.transform.Rotate(0, 0, randomNumberRotate);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.right * bulletSpeed;
+            Destroy(bullet, 3f);
+
+            canShootBullet = false;
+            timerToMaxDamageCount = 0;
+        }
+        //else
+        //{
+        //    launchedEnemy = PlayerGrabEnemy.instance.grabbedEnemy;
+        //    PlayerGrabEnemy.instance.grabbedEnemy = null;
+        //    launchedEnemy.transform.parent = null;
+        //    launchedEnemy.GetComponent<EnemyHealth>().isGrabbed = false;
+        //    launchedEnemy.GetComponent<Rigidbody2D>().velocity = launchedEnemy.transform.right * bulletSpeed;
+            
+        //}
+    }
+
+    float CalculateHoldDownForce(float holdTime)
+    {
+        float maxForceHoldDownTime = 2f;
+        float holdTimeNormalized = Mathf.Clamp01(holdTime/maxForceHoldDownTime);
+        float force = holdTimeNormalized * 50;
+        return force;
+    }
+
+    void ShootEnemy(float force)
+    {
+        launchedEnemy = PlayerGrabEnemy.instance.grabbedEnemy;
+        PlayerGrabEnemy.instance.grabbedEnemy = null;
+        launchedEnemy.transform.parent = null;
+        launchedEnemy.GetComponent<EnemyHealth>().isGrabbed = false;
+        //launchedEnemy.GetComponent<Rigidbody2D>().velocity = launchedEnemy.transform.right * force;
+        launchedEnemy.GetComponent<Rigidbody2D>().AddForce(launchedEnemy.transform.right * force/5, ForceMode2D.Impulse);
+        PlayerGrabEnemy.instance.enemyLaunched = true;
     }
 
     void CanShootBulletAgain()
