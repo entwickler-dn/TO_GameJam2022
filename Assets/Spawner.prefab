@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9188801681203835012}
   - component: {fileID: 1363807932084818995}
   - component: {fileID: -9147755379109509983}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}
@@ -122,3 +122,4 @@ MonoBehaviour:
   - {fileID: 2486702578781698390, guid: e6ca9986f6fbcd54cb077bb0ef8f9f72, type: 3}
   - {fileID: 3845042667656571865, guid: b19ff84005b24ef47a6668cffdaf7873, type: 3}
   - {fileID: 6819379166805577133, guid: c87eb127108202e40be351a90022e1cd, type: 3}
+  totalSpawnPercentage: 0

@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     //bool chestSpawned => (GameObject.FindObjectOfType<ChestController>() != null);
     //[SerializeField] GameObject chestPrefab;
     [SerializeField] GameObject enemySpawnerPrefab;
+    GameObject floorTilemap;
 
     public float timeBetweenRounds;
     float timeBetweenRoundsCount;
@@ -114,7 +115,8 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             Vector2 spawnPos = playerPos + Random.insideUnitCircle * enemySpawnRadius;
-            if (Vector2.Distance(spawnPos, playerPos) > 5f && !Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius))
+            if (Vector2.Distance(spawnPos, playerPos) > 5f && !Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius, LayerMask.GetMask("Spawner")) &&
+                Physics2D.OverlapCircle(spawnPos, enemySpawnerPrefab.GetComponent<CircleCollider2D>().radius, LayerMask.GetMask("Floor")))
             {
                 yield return new WaitForSeconds(0.5f);
                 GameObject enemySpawner = Instantiate(enemySpawnerPrefab, spawnPos, Quaternion.identity);
