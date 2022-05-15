@@ -15,7 +15,6 @@ public class SpawnManager : MonoBehaviour
     //bool chestSpawned => (GameObject.FindObjectOfType<ChestController>() != null);
     //[SerializeField] GameObject chestPrefab;
     [SerializeField] GameObject enemySpawnerPrefab;
-    GameObject floorTilemap;
 
     public float timeBetweenRounds;
     float timeBetweenRoundsCount;
@@ -29,9 +28,20 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        Invoke("SpawnFirstWave", 0.5f);
+    }
+
+    void SpawnFirstWave()
+    {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        //SpawnEnemies(maxEnemyCount);
-        StartCoroutine(SpawnEnemies2(maxEnemyCount));
+        if (GameManager.instance.skipTutorial)
+        {
+            StartCoroutine(SpawnEnemies2(maxEnemyCount));
+        }
+        else
+        {
+            StartCoroutine(SpawnEnemies2(1));
+        }
         ResetTimer();
     }
 
@@ -88,26 +98,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    //public GameObject FindClosestSpawner()
-    //{
-    //    GameObject[] gos;
-    //    gos = GameObject.FindGameObjectsWithTag("Spawner");
-    //    GameObject closest = null;
-    //    float distance = Mathf.Infinity;
-    //    Vector3 position = transform.position;
-    //    foreach (GameObject go in gos)
-    //    {
-    //        Vector3 diff = go.transform.position - position;
-    //        float curDistance = diff.sqrMagnitude;
-    //        if (curDistance < distance)
-    //        {
-    //            closest = go;
-    //            distance = curDistance;
-    //        }
-    //    }
-    //    return closest;
-    //}
-
     bool isRunningSpawnEnemies2 = false;
     public IEnumerator SpawnEnemies2(int amount)
     {
@@ -120,7 +110,7 @@ public class SpawnManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
                 GameObject enemySpawner = Instantiate(enemySpawnerPrefab, spawnPos, Quaternion.identity);
-                SpawnManager.instance.AddEnemyToCounter();
+                AddEnemyToCounter();
             }
             else
             {

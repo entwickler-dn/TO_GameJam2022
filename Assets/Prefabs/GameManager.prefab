@@ -45,3 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalPoints: 0
+  maps:
+  - {fileID: 2196726561817871473, guid: cf13d14f4e8c4cd4eb951b4d3d21c8d2, type: 3}
+  - {fileID: 5149178291384952267, guid: d00fcec6fa505464895e0f868dcc6aa0, type: 3}
+  - {fileID: 7455717793845660816, guid: 89b582763c2f3dd44a437a4bf3b96916, type: 3}
+  - {fileID: 4531873037049579885, guid: dc5635c15d3d6594eb96937c7e4482fa, type: 3}
+  - {fileID: 3582324276163063543, guid: 11f8baa6cb01d264b84a2f98906a3b21, type: 3}
+  pointCounter: {fileID: 0}

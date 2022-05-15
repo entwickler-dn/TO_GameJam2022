@@ -150,6 +150,7 @@ public class PlayerShoot : MonoBehaviour
         //launchedEnemy.GetComponent<Rigidbody2D>().velocity = launchedEnemy.transform.right * force;
         launchedEnemy.GetComponent<Rigidbody2D>().AddForce(launchedEnemy.transform.right * force/3, ForceMode2D.Impulse);
         PlayerGrabEnemy.instance.enemyLaunched = true;
+        launchedEnemy.GetComponent<EnemyHealth>().capsuleCol.enabled = true;
     }
 
     void CanShootBulletAgain()

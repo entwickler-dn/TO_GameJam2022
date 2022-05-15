@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010958195, y: -0.2500834}
+  m_Offset: {x: -0.010958195, y: -0.1807642}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -173,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40691853, y: 1.064848}
+  m_Size: {x: 0.40691853, y: 0.92620945}
   m_EdgeRadius: 0
 --- !u!95 &3758081825653823148
 Animator:
@@ -211,7 +211,7 @@ MonoBehaviour:
   maxHealth: 1
   points: 500
   damage: 1
-  weight: 5
+  weight: 5000
   knockedPush: 12
   knockedPushTime: 0.12
   playerPush: 15
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 1
   height: 2
   canMove: 1
   maxSpeed: 1
@@ -345,8 +345,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018874079, y: -0.723643}
-  m_Size: {x: 0.38256705, y: 0.2937198}
+  m_Offset: {x: -0.018874068, y: -0.6451512}
+  m_Size: {x: 0.3825671, y: 0.13673617}
   m_Direction: 1
 --- !u!250 &4544319761743702082
 PointEffector2D:

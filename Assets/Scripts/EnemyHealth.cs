@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     Rigidbody2D rb;
     BoxCollider2D bodyCol;
-    CapsuleCollider2D capsuleCol;
+    public CapsuleCollider2D capsuleCol;
     CircleCollider2D circleColEffector;
     PointEffector2D pointEffector;
 
@@ -145,12 +145,12 @@ public class EnemyHealth : MonoBehaviour
     {
         if(canBeDamaged)
         {
-            if (col.gameObject.CompareTag("PlayerBulletSmall"))
+            if (col.gameObject.CompareTag("PlayerBulletSmall") && health > 0)
             {
                 LoseHealth(1f, col.GetComponent<Rigidbody2D>().velocity);
                 Destroy(col.gameObject);
             }
-            else if (col.gameObject.CompareTag("PlayerBulletBig"))
+            else if (col.gameObject.CompareTag("PlayerBulletBig") && health > 0)
             {
                 LoseHealth(3f, col.GetComponent<Rigidbody2D>().velocity);
                 Destroy(col.gameObject);
